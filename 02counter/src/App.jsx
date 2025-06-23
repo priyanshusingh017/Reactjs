@@ -1,13 +1,11 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
 function App() {
 
-  let [counter , setCounter] = useState(5)
+  const [counter , setCounter] = useState(5)
 
-  // here in variable refence we use the let as varible assign not const one .
   // counter - variable 
   // depend upon you to assign the variable name -> setCounter ->function  responsible to change the variable value 
   // default value -> 15 because in usestate we assign it as 15 
@@ -23,7 +21,12 @@ function App() {
       return  // -> not excced the limit 20 
     }
     else {
-      setCounter(counter +1 )
+      /*setCounter(prevCounter => prevCounter+1)
+      setCounter(prevCounter => prevCounter+1)
+      setCounter(prevCounter => prevCounter+1)
+      */ // -> use to change the value in banch format when setcounter use its chnage it the value in bamch -> 5 to next 8 .
+
+      setCounter(counter+1)
       console.log("clicked" , counter);
     }
   }
