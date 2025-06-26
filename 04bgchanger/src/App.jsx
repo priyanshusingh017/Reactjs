@@ -1,16 +1,24 @@
 import { useState } from "react"
 
-
 function App() {
-  const [color , setColor] = useState("white")
+  const [color , setColor] = useState("black")
 
   return (
-    <div className=" w-full h-screen duration-200"
+
+    <>
+    <div className=" w-full h-screen duration-200 flex justify-center"
     style={{backgroundColor: color}}
     >
-      <div className="fixed bottom-12 left-1/3 transform -translate-x-1/3 flex justify-center  items-centre px-0 border border-black rounded-3xl" >
+
+      <strong className="flex justify-center items-center">
+      <h1 className= " bg-white rounded-xl px-2"> 
+      React + TailwindCss + Vite</h1>
+      </strong>
+
+      <div className="fixed bottom-12 border border-black rounded-3xl" >
+
         <div className=" flex flex-wrap justify-centre 
-        gap-3 shadow-lg bg-white px-3 py-2 rounded-3xl">
+        gap-2 shadow-lg bg-white px-4 py-2 rounded-3xl">
 
           <button
           onClick={() => {setColor("red")}}
@@ -83,6 +91,34 @@ function App() {
           </button>
 
           <button
+          onClick={() => {setColor("pink")}}
+          className="outline-none px-4 py-1
+          rounded-full text-white shadow-lg"
+          style={{backgroundColor : "pink"}}>pink
+          </button>
+
+          <button
+          onClick={() => {setColor("silver")}}
+          className="outline-none px-4 py-1
+          rounded-full text-white shadow-lg"
+          style={{backgroundColor : "silver"}}>silver
+          </button>
+
+          <button
+          onClick={() => {setColor("maroon")}}
+          className="outline-none px-4 py-1
+          rounded-full text-white shadow-lg"
+          style={{backgroundColor : "maroon"}}>maroon
+          </button>
+
+          <button
+          onClick={() => {setColor("white")}}
+          className="outline-none px-4 py-1
+          rounded-full text-black shadow-lg"
+          style={{backgroundColor : "white"}}>white
+          </button>
+
+          <button
           onClick={() => {setColor("black")}}
           className="outline-none px-4 py-1
           rounded-full text-white shadow-lg"
@@ -92,6 +128,7 @@ function App() {
         </div>
       </div>
     </div>
+     </> 
   )
 }
 
