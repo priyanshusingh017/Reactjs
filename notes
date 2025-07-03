@@ -54,4 +54,7 @@
 - Official React docs on [Reconciliation](https://react.dev/learn/reconciliation).
 
 
-
+# Basic example of custom hooks -> 
+function hello (){
+  return [] 
+}
