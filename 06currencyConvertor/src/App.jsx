@@ -1,36 +1,44 @@
 import { useState, useEffect } from 'react'
-import { InputBox } from './components'
+import { InputBox } from './Components'
 import useCurrencyInfo from './hooks/useCurrencyInfo'
 
 function App() {
-  const [amount, setAmount] = useState()
+  const [amount, setAmount] = useState(0)
   const [from, setFrom] = useState("usd")
   const [to, setTo] = useState("inr")
-  const [convertedAmount, setConvertedAmount] = useState()
+  const [convertedAmount, setConvertedAmount] = useState(0)
+  const [lastAction, setLastAction] = useState("auto") // 'auto' or 'manual'
 
   const currencyInfo = useCurrencyInfo(from)
   const options = Object.keys(currencyInfo)
-
 
   const swap = () => {
     setFrom(to)
     setTo(from)
     setAmount(convertedAmount)
     setConvertedAmount(amount)
+    setLastAction("auto")
+  }
+
+  const convert = () => {
+    if (amount && currencyInfo[to]) {
+      setConvertedAmount((amount * currencyInfo[to]).toFixed(5))
+      setLastAction("manual")
+    }
   }
 
   useEffect(() => {
-    if (amount && currencyInfo[to]) {
-      setConvertedAmount((amount * currencyInfo[to]). toFixed(5))
+    if (lastAction === "auto" && amount && currencyInfo[to]) {
+      setConvertedAmount((amount * currencyInfo[to]).toFixed(5))
     }
-  }, [amount, from, to, currencyInfo])
+  }, [amount, from, to, currencyInfo, lastAction])
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-purple-900">
       <div className="w-full max-w-md mx-4">
         <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden border border-white/20">
           <div className="p-1 bg-gradient-to-r from-blue-500 to-purple-600">
-            <h1 className="text-white text-center text-xl font-bold py-2"> Currency Converter</h1>
+            <h1 className="text-white text-center text-xl font-bold py-2">Currency Converter</h1>
           </div>
           
           <div className="p-6">
@@ -39,9 +47,15 @@ function App() {
                 label="From"
                 amount={amount}
                 currencyOptions={options}
-                onCurrencyChange={setFrom}
+                onCurrencyChange={(currency) => {
+                  setFrom(currency)
+                  setLastAction("auto")
+                }}
                 selectCurrency={from}
-                onAmountChange={setAmount}
+                onAmountChange={(value) => {
+                  setAmount(value)
+                  setLastAction("auto")
+                }}
               />
             </div>
 
@@ -62,21 +76,25 @@ function App() {
                 label="To"
                 amount={convertedAmount}
                 currencyOptions={options}
-                onCurrencyChange={setTo}
+                onCurrencyChange={(currency) => {
+                  setTo(currency)
+                  setLastAction("auto")
+                }}
                 selectCurrency={to}
                 amountDisable
               />
             </div>
 
             <div className="text-center text-white/80 mb-2">
-            <p className="text-sm">1 {from.toUpperCase()} = 
-               {currencyInfo[to] } {to.toUpperCase()}</p>
+              <p className="text-sm">1 {from.toUpperCase()} = {currencyInfo[to]?.toFixed(6)} {to.toUpperCase()}</p>
             </div>
 
             <div className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg p-[2px]">
               <button 
+                type="button"
                 className="w-full bg-white/90 hover:bg-white text-blue-600 font-semibold py-3 rounded-lg transition-all"
-               >
+                onClick={convert}
+              >
                 Convert {from.toUpperCase()} to {to.toUpperCase()}
               </button>
             </div>
