@@ -1,63 +1,67 @@
 - The virtual DOM is now used minimally in React; it’s no longer the core update mechanism.
-- `createRoot` is used to create a root for rendering React components into a browser DOM node.
-- React compares its own DOM with the main DOM and only updates the changed parts, improving performance compared to repainting the whole DOM.
-- The virtual DOM creates a tree structure, compares it with the real DOM, and updates only the changed parts.
-- The React team realized not every UI update needs to be immediate, leading to the introduction of hooks.
+- `createRoot` initializes a React root for rendering components into a DOM node.
+- React uses a virtual DOM to efficiently update only the parts of the real DOM that have changed, rather than repainting the entire DOM.
+- The virtual DOM represents the UI as a tree structure, which React compares to the real DOM to determine minimal updates.
+- Hooks were introduced after the React team realized not all UI updates need to be immediate.
 
-- Key document: [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
+**Key Document:** [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
 
-**Key Features of React Fiber:**
-  1. Ability to pause, abort, and reuse work as new updates come in.
-  2. Assign priority to different types of updates.
-  3. New concurrency primitives.
+**React Fiber Highlights:**
+1. Can pause, abort, or reuse work as new updates arrive.
+2. Assigns priorities to different updates.
+3. Introduces new concurrency features.
 
 **Hydration:**
-- When JavaScript is loaded on the site, it helps with hydration (making server-rendered HTML interactive).
+- Hydration makes server-rendered HTML interactive when JavaScript loads.
 
 **Recommended Resources:**
-- React Components, Elements, and Instances: Understand the differences.
-- Reconciliation: Learn about React’s reconciliation algorithm.
-- React Basic Theoretical Concepts: Conceptual model of React.
-- React Design Principles: Especially the section on scheduling and React Fiber.
+- Differences between React Components, Elements, and Instances.
+- React’s reconciliation algorithm.
+- Conceptual model of React.
+- React Design Principles, especially scheduling and Fiber.
 
 **Diffing and Keys:**
-- List diffing uses keys. Keys must be stable, predictable, and unique.
+- Keys in lists must be stable, predictable, and unique for efficient diffing.
 
 **Scheduling and Updates:**
-1. Not every UI update needs to be immediate; unnecessary updates can hurt performance.
-2. Different updates have different priorities (e.g., animations vs. data updates).
-3. Push-based scheduling: The app decides when to update.
-4. Pull-based scheduling: React decides when to update for better efficiency.
+1. Not all UI updates are urgent; unnecessary updates can reduce performance.
+2. Updates have different priorities (e.g., animations vs. data).
+3. Push-based scheduling: the app triggers updates.
+4. Pull-based scheduling: React manages update timing for efficiency.
 
-**Goals of React Fiber Scheduling:**
-1. Pause work and resume later.
-2. Assign priority to different work.
-3. Reuse previously completed work.
-4. Abort work if it’s no longer needed.
-
+**React Fiber Scheduling Goals:**
+1. Pause and resume work.
+2. Prioritize different tasks.
+3. Reuse completed work.
+4. Abort unnecessary work.
 
 **React Fiber Summary:**
-- Fiber is React’s new reconciliation engine, enabling incremental rendering.
-- Allows React to split rendering work into chunks and spread it over multiple frames.
-- Improves responsiveness by letting high-priority updates interrupt low-priority ones.
+- Fiber is React’s reconciliation engine, supporting incremental rendering.
+- Splits rendering into chunks, spreading work across frames.
+- Improves responsiveness by allowing high-priority updates to interrupt lower-priority ones.
 
 **Concurrency in React:**
 - Enables features like Suspense and concurrent rendering.
-- React can prepare multiple versions of the UI at the same time.
+- Allows React to prepare multiple UI versions simultaneously.
 
 **Best Practices:**
-- Use stable, unique keys for list items to help React track changes efficiently.
-- Prefer pull-based scheduling for smoother user experiences.
-- Optimize component updates to avoid unnecessary re-renders.
+- Use stable, unique keys for list items.
+- Prefer pull-based scheduling for smoother UX.
+- Optimize components to avoid unnecessary re-renders.
 
 **Further Reading:**
 - Official React docs on [Reconciliation](https://react.dev/learn/reconciliation).
 
+---
 
-# Basic example of custom hooks -> 
-function hello (){
-  return [] 
+### Basic Example of a Custom Hook
+
+```js
+function useHello() {
+  return [];
 }
+```
 
-Link is used in the place of <a> tag where in html it is used for refresh the page where in react we don't have the concepts of refresh thats why we use Link tag, where NavLink provide the some additional features .
-in <a> we use href where in react we use to="/" 
+---
+
+In React, use the `Link` component instead of the `<a>` tag to avoid full page reloads. `NavLink` provides additional features for navigation. While `<a>` uses `href`, React’s `Link` uses the `to` prop (e.g., `to="/"`).
