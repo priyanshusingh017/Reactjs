@@ -58,3 +58,6 @@
 function hello (){
   return [] 
 }
+
+Link is used in the place of <a> tag where in html it is used for refresh the page where in react we don't have the concepts of refresh thats why we use Link tag, where NavLink provide the some additional features .
+in <a> we use href where in react we use to="/" 
