@@ -65,3 +65,28 @@ function useHello() {
 ---
 
 In React, use the `Link` component instead of the `<a>` tag to avoid full page reloads. `NavLink` provides additional features for navigation. While `<a>` uses `href`, React’s `Link` uses the `to` prop (e.g., `to="/"`).
+
+
+## Steps to Create and Use React Context
+
+1. **Create the Context:**
+  ```js
+  import React from "react";
+
+  const UserContext = React.createContext();
+  export default UserContext;
+  ```
+
+2. **Wrap Components with the Provider:**
+  ```jsx
+  <UserContext.Provider value={/* context value */}>
+    <Login />
+    <Card>
+     <Data />
+    </Card>
+  </UserContext.Provider>
+  ```
+
+- The `UserContext.Provider` makes data available to all nested components.
+- Any component inside the provider can access the context value using `useContext(UserContext)`.
+- This pattern helps share data (like user info) across the component tree without prop drilling.
